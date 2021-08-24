@@ -1,0 +1,23 @@
+provider "azurerm" {
+  features{}
+}
+
+
+resource "azurerm_resource_group" "main" {
+  name = "haakonr-myportal-rg"
+  location = "norwayeast"
+  tags{
+    terraform = "true"
+  }
+}
+
+resource "azurerm_storage_account" "main" {
+  name = "haakonrstorageaccount"
+  resource_group_name = "${azurerm_resource_group.main.name}"
+  location = "norwayeast"
+  account_tier = "Standard"
+  account_replication_type = "LRS"
+  tags{
+    terraform = "true"
+  }
+}
